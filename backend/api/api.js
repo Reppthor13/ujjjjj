@@ -41,4 +41,20 @@ router.get('/testsql', async (request, response) => {
     }
 });
 
+router.get('/osszes', async (request, response) => {
+    console.log("szia");
+    try {
+        const osszes = await database.osszes();
+        response.status(200).json({
+            message: 'Ez a végpont működik.',
+            results: osszes
+        });
+    } catch (error) {
+        console.log(error);
+        response.status(500).json({
+            message: 'Ez a végpont nem működik.'
+        });
+    }
+});
+
 module.exports = router;

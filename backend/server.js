@@ -8,7 +8,7 @@ const app = express();
 const router = express.Router();
 
 const ip = '127.0.0.1';
-const port = 3000;
+const port = 4000;
 
 app.use(express.json()); //?Middleware JSON
 app.set('trust proxy', 1); //?Middleware Proxy
@@ -37,6 +37,7 @@ app.use('/api', endpoints);
 app.use(express.static(path.join(__dirname, '../frontend'))); //?frontend mappa tartalmának betöltése az oldal működéséhez
 app.listen(port, ip, () => {
     console.log(`Szerver elérhetősége: http://${ip}:${port}`);
+    console.log("szia");
 });
 
 //?Szerver futtatása terminalból: npm run dev
