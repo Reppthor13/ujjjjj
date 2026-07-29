@@ -58,6 +58,7 @@ router.get('/osszes', async (request, response) => {
 });
 
 router.get('/coffees', async (request, response) => {
+    console.log("szia2");
     try {
         const coffees = await database.coffees();
         response.status(200).json({
@@ -65,7 +66,6 @@ router.get('/coffees', async (request, response) => {
             results: coffees
         });
     } catch (error) {
-        console.log(error);
         response.status(500).json({
             message: 'Ez a végpont nem működik.'
         });
@@ -74,6 +74,7 @@ router.get('/coffees', async (request, response) => {
 
 
 router.post('/coffeesPost', async (request, response) => {
+    console.log("szia3");
     try {
         const { nev, ar, bab_szarmazasi_orszag, bab_gyartasi_orszag } = request.body;
         response.status(200).json({
@@ -87,6 +88,7 @@ router.post('/coffeesPost', async (request, response) => {
 });
 
 router.get('/countriesByBean', async (request, response) => {
+    console.log("szia4");
     try {
         const countriesByBean = await database.countriesByBean();
         response.status(200).json({
@@ -94,7 +96,6 @@ router.get('/countriesByBean', async (request, response) => {
             results: countriesByBean
         });
     } catch (error) {
-        console.log(error);
         response.status(500).json({
             message: 'Ez a végpont nem működik.'
         });
@@ -103,6 +104,7 @@ router.get('/countriesByBean', async (request, response) => {
 
 
 router.get('/coffees-by-country/:country_id', async (request, response) => {
+    console.log("szia5");
     try {
         const coffeesByCountry = await database.coffeesByCountry();
         response.status(200).json({

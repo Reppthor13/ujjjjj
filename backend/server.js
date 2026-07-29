@@ -37,7 +37,7 @@ app.use('/api', endpoints);
 app.use(express.static(path.join(__dirname, '../frontend'))); //?frontend mappa tartalmának betöltése az oldal működéséhez
 app.listen(port, ip, () => {
     console.log(`Szerver elérhetősége: http://${ip}:${port}`);
-    console.log("szia");
+    console.log("asd");
 });
 
 //?Szerver futtatása terminalból: npm run dev
