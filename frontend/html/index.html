@@ -16,9 +16,61 @@
     </head>
     <body>
         <div class="container-fluid">
-            <div class="row text-center">
-                <h1 class="display-1">A szerver fut.</h1>
+            <table>
+                <thead>
+                    <th>AR</th>
+                    <th>NEV</th>
+                    <th>BAB_SZARMAZASI_ORSZAG</th>
+                    <th>BAB_GYARTASI_ORSZAG</th>
+                </thead>
+                <tbody id="tbody">
+
+                </tbody>
+            </table>
+            <div class="container-fluid">
+            <div id="select">
+                <button id="gomb">gomb</button>
             </div>
         </div>
+        </div>
+        <script>
+            const gomb = document.getElementById("gomb").addEventListener("click", Kiiras());
+            function Kiiras(){
+                fetch("http://127.0.0.1:4000/api/countr")
+                .then(x => x.json())
+                .then(Kavek => {
+                    const tbody = document.getElementById("tbody");
+                    for(let i = 0; i<Kavek.results.length; i++){
+                        const tr = document.createElement("tr");
+                        const ar = document.createElement("td");
+                        ar.textContent = Kavek.results[i].ar;
+                        const nev = document.createElement("td");
+                        nev.textContent = Kavek.results[i].nev;
+                        const szarm = document.createElement("td");
+                        szarm.textContent = Kavek.results[i].szarmazas;
+                        const gyart = document.createElement("td");
+                        gyart.textContent = Kavek.results[i].gyartas;
+                        tr.append(ar, nev, szarm, gyart);
+                        tbody.append(tr);
+                    }
+                });
+            }
+            Lekeres();
+            function Lekeres(){
+                fetch("http://127.0.0.1:4000/api/countries")
+                .then(x => x.json())
+                .then(Orszagok => {
+                    const selectDiv = document.getElementById("select");
+                    const select = document.createElement("select");
+                    for(let i = 0; i<Orszagok.results.length; i++){
+                        const option = document.createElement("option");
+                        option.value = Orszagok.results[i].nev;
+                        option.textContent = Orszagok.results[i].nev;
+                        select.append(option);
+                    }
+                    selectDiv.append(select);
+                });
+            }
+        </script>
     </body>
 </html>
