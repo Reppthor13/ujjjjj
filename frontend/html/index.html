@@ -35,60 +35,44 @@
         </div>
         <script>
             let jonev = "";
-
             Lekeres();
-
             function Lekeres() {
                 fetch("http://127.0.0.1:4000/api/countries")
                     .then(x => x.json())
                     .then(Orszagok => {
                         const selectDiv = document.getElementById("select");
                         const select = document.createElement("select");
-                        
                         for (let i = 0; i < Orszagok.results.length; i++) {
                             const option = document.createElement("option");
-
                             option.value = Orszagok.results[i].nev;
                             option.textContent = Orszagok.results[i].nev;
-
                             select.append(option);
                         }
-
                         select.addEventListener("change", function () {
                             jonev = select.value;
                         });
-
                         jonev = select.value;
-
                         selectDiv.append(select);
                     });
             }
-
             document.getElementById("gomb").addEventListener("click", Kiiras);
-
             function Kiiras() {
                 fetch("http://127.0.0.1:4000/api/osszes")
                     .then(x => x.json())
                     .then(Kavek => {
                         const tbody = document.getElementById("tbody");
                         tbody.textContent = "";
-
                         for (let i = 0; i < Kavek.results.length; i++) {
                             if (Kavek.results[i].szarmazas == jonev) {
                                 const tr = document.createElement("tr");
-
                                 const ar = document.createElement("td");
                                 ar.textContent = Kavek.results[i].ar;
-
                                 const nev = document.createElement("td");
                                 nev.textContent = Kavek.results[i].nev;
-
                                 const szarm = document.createElement("td");
                                 szarm.textContent = Kavek.results[i].szarmazas;
-
                                 const gyart = document.createElement("td");
                                 gyart.textContent = Kavek.results[i].gyartas;
-
                                 tr.append(ar, nev, szarm, gyart);
                                 tbody.append(tr);
                             }
