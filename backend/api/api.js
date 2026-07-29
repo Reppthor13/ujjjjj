@@ -57,4 +57,65 @@ router.get('/osszes', async (request, response) => {
     }
 });
 
+router.get('/coffees', async (request, response) => {
+    try {
+        const coffees = await database.coffees();
+        response.status(200).json({
+            message: 'Ez a végpont működik.',
+            results: coffees
+        });
+    } catch (error) {
+        console.log(error);
+        response.status(500).json({
+            message: 'Ez a végpont nem működik.'
+        });
+    }
+});
+
+
+router.post('/coffeesPost', async (request, response) => {
+    try {
+        const { nev, ar, bab_szarmazasi_orszag, bab_gyartasi_orszag } = request.body;
+        response.status(200).json({
+            message: 'Ez a végpont működik.'
+        });
+    } catch (error) {
+        response.status(500).json({
+            message: 'Ez a végpont nem működik.'
+        });
+    }
+});
+
+router.get('/countriesByBean', async (request, response) => {
+    try {
+        const countriesByBean = await database.countriesByBean();
+        response.status(200).json({
+            message: 'Ez a végpont működik.',
+            results: countriesByBean
+        });
+    } catch (error) {
+        console.log(error);
+        response.status(500).json({
+            message: 'Ez a végpont nem működik.'
+        });
+    }
+});
+
+
+router.get('/coffees-by-country/:country_id', async (request, response) => {
+    try {
+        const coffeesByCountry = await database.coffeesByCountry();
+        response.status(200).json({
+            message: 'Ez a végpont működik.',
+            results: coffeesByCountry
+        });
+    } catch (error) {
+        console.log(error);
+        response.status(500).json({
+            message: 'Ez a végpont nem működik.'
+        });
+    }
+});
+
+
 module.exports = router;
