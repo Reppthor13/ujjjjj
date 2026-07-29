@@ -32,13 +32,13 @@ async function coffeesPost(nev, ar, bab_szarmazasi_orszag, bab_gyartasi_orszag) 
     return rows;
 }
 async function countriesByBean() {
-    const query = 'SELECT COUNT(kave.nev), orszag.nev AS szarmazas FROM kave INNER JOIN orszag ON orszag.id = kave.bab_szarmazasi_orszag INNER JOIN orszag o2 ON o2.id = kave.bab_gyartasi_orszag GROUP BY orszag.nev;';
+    const query = 'SELECT COUNT(kave.nev) AS db, orszag.nev AS szarmazas FROM kave INNER JOIN orszag ON orszag.id = kave.bab_szarmazasi_orszag INNER JOIN orszag o2 ON o2.id = kave.bab_gyartasi_orszag GROUP BY orszag.nev;';
     const [rows] = await pool.execute(query);
     return rows;
 }
 async function coffeesByCountry(id) {
-    const query = 'SELECT COUNT(kave.nev), orszag.nev AS szarmazas FROM kave INNER JOIN orszag ON orszag.id = kave.bab_szarmazasi_orszag INNER JOIN orszag o2 ON o2.id = kave.bab_gyartasi_orszag WHERE orszag.id = ?;';
-    const [rows] = await pool.execute(id);
+    const query = 'SELECT COUNT(kave.nev) AS db, orszag.nev AS szarmazas FROM kave INNER JOIN orszag ON orszag.id = kave.bab_szarmazasi_orszag WHERE orszag.id = ?';
+    const [rows] = await pool.execute(query, [id]);
     return rows;
 }
 async function countries() {
